@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Carousel, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "../index.css";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+import api from "../api";
+import CheckoutForm from "./checkout/CheckoutForm";
+
+const stripePromise = api.getPublicStripeKey().then(key => loadStripe(key));
 
 export const ProductsDetail = (props) => {
   let urlParams = window.location.pathname.split("/");
@@ -62,6 +68,13 @@ export const ProductsDetail = (props) => {
           })}
         </Carousel>
         <br />
+
+        <div class="container text-center mb-10">
+
+        <Elements stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
+        </div>
         <h1>{productsDetail.title}</h1>
         <Table striped borderless>
           <thead>
@@ -115,14 +128,7 @@ export const ProductsDetail = (props) => {
             </tr>
           </tbody>
         </Table>
-        <div class="container text-center mb-10">
-          <Link
-            className="btn btn-primary"
-            to={"/checkout/" + productsDetail.id}
-          >
-            Checkout
-          </Link>
-        </div>
+        
       </div>
     </>
   );
