@@ -6,6 +6,11 @@ import "../index.css";
 export const ProductsDetail = (props) => {
   let urlParams = window.location.pathname.split("/");
   let [productsDetail, setProductsDetail] = useState({});
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   //   console.log("urlParams", urlParams)
 
@@ -44,11 +49,11 @@ export const ProductsDetail = (props) => {
   return (
     <>
       <div className="container">
-        <Carousel fade>
-          {productsDetail?.images?.map((item, index) => {
+        <Carousel activeIndex={index} onSelect={handleSelect}>
+          {productsDetail?.images?.map((item, index) => { 
             return (
               <Carousel.Item>
-                <img className="d-block w-100" src={item} alt="First slide" />
+                <img className="d-block w-100" src={item} alt="First slide" style={{ width: "100px", height: "1000px" }}/>
                 <Carousel.Caption>
                   <h1 style={{ color: "white" }}>{productsDetail.brand}</h1>
                 </Carousel.Caption>

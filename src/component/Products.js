@@ -10,13 +10,13 @@ const Product = (props) => {
 
   return (
     <Card
-      style={{ width: product.width }}
-      className="m-5 d-sm-flex align-items-center justify-content-between"
+      style={{ width: "18rem" }}
+      className="m-2 d-sm-flex align-items-center justify-content-between"
     >
       <Card.Img
         variant="top"
         src={product.imageSrc}
-        style={{ width: "10rem", height: "10rem" }}
+        style={{ width: "17rem", height: "10rem" }}
       />
       <Card.Body>
         <Card.Title>{product.brand}</Card.Title>
@@ -36,7 +36,6 @@ export const Products = () => {
     var config = {
       method: "GET",
       url: "https://dummyjson.com/products",
-      headers: {"Content-Type": "application/json"},
     };
 
     axios(config)
@@ -64,7 +63,7 @@ export const Products = () => {
               <Container>
                 <Row>
                   {products?.products?.map((item) => (
-                    <Col md={4} xs={12} sm={6}>
+                    <Col md={3} xs={12} sm={6}>
                       <Product
                         className="col col-md-3"
                         brand={item.brand}
